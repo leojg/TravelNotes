@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -22,10 +24,25 @@ android {
     }
 }
 
+project.ext {
+    // Sdk and tools dependencies
+    appcompatVersion = '1.0.2'
+    constraintLayoutVersion = '1.1.1'
+    recyclerViewVersion = '1.1.1'
+    coreKtxVersion = '1.0.1'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+
+    // Sdk and tools dependencies
+    implementation "androidx.appcompat:appcompat:$project.ext.appcompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$project.ext.constraintLayoutVersion"
+    implementation "androidx.androidx.recyclerview:recyclerview:$project.ext.recyclerViewVersion"
+    implementation "androidx.core:core-ktx:$project.ext.coreKtxVersion"
+
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
