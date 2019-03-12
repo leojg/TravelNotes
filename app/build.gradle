@@ -34,6 +34,7 @@ project.ext {
     recyclerViewVersion = '1.0.0'
     materialVersion = '1.0.0'
     coreKtxVersion = '1.0.1'
+    koinVersion = '1.0.2'
 }
 
 dependencies {
@@ -46,6 +47,10 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$project.ext.constraintLayoutVersion"
     implementation "androidx.recyclerview:recyclerview:$project.ext.recyclerViewVersion"
     implementation "androidx.core:core-ktx:$project.ext.coreKtxVersion"
+
+    //koin
+    implementation "org.koin:koin-android:$project.ext.koinVersion"
+    implementation "org.koin:koin-androidx-viewmodel:$project.ext.koinVersion"
 
 
     testImplementation 'junit:junit:4.12'

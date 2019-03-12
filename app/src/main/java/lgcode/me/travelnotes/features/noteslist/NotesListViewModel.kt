@@ -1,10 +1,8 @@
 package lgcode.me.travelnotes.features.noteslist
 
-import android.text.format.DateUtils
 import androidx.lifecycle.MutableLiveData
 import lgcode.me.travelnotes.core.domain.Note
 import lgcode.me.travelnotes.core.viewmodel.BaseViewModel
-import java.time.Instant
 import java.util.*
 
 class NotesListViewModel: BaseViewModel() {

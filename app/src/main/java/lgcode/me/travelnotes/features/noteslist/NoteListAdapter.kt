@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import lgcode.me.travelnotes.R
 import lgcode.me.travelnotes.core.domain.Note
 import lgcode.me.travelnotes.databinding.ItemNoteBinding
+import java.text.DateFormat
 
-class NoteListAdapter(): RecyclerView.Adapter<NoteListAdapter.NoteListViewHolder>() {
+class NoteListAdapter: RecyclerView.Adapter<NoteListAdapter.NoteListViewHolder>() {
 
     private val notesList = ArrayList<Note>()
 
@@ -17,13 +18,12 @@ class NoteListAdapter(): RecyclerView.Adapter<NoteListAdapter.NoteListViewHolder
                 LayoutInflater.from(parent.context), R.layout.item_note, parent, false))
     }
 
-    override fun getItemCount(): Int = notesList.size
+    override fun getItemCount() = notesList.size
 
     override fun onBindViewHolder(holder: NoteListViewHolder, position: Int) {
         notesList[position].let {
-            with(holder) {
-                bind()
-            }
+            holder.binding.noteSummaryTextview.text = it.text
+            holder.binding.noteDateTextview.text = DateFormat.getDateInstance().format(it.date)
         }
     }
 
@@ -33,11 +33,5 @@ class NoteListAdapter(): RecyclerView.Adapter<NoteListAdapter.NoteListViewHolder
         notifyDataSetChanged()
     }
 
-    class NoteListViewHolder(private val binding: ItemNoteBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
-            with(binding) {
-                executePendingBindings()
-            }
-        }
-    }
+    class NoteListViewHolder(val binding: ItemNoteBinding): RecyclerView.ViewHolder(binding.root)
 }

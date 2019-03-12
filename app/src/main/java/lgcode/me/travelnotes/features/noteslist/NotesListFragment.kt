@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import lgcode.me.travelnotes.core.ui.BaseFragment
 import lgcode.me.travelnotes.databinding.FragmentNotesListBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotesListFragment: BaseFragment() {
 
@@ -14,19 +15,21 @@ class NotesListFragment: BaseFragment() {
         fun newInstance(): NotesListFragment = NotesListFragment()
     }
 
-    private lateinit var viewModel: NotesListViewModel
+    private val viewModel by viewModel<NotesListViewModel>()
     private lateinit var notesListBinding: FragmentNotesListBinding
     private lateinit var noteListAdapter: NoteListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         notesListBinding = FragmentNotesListBinding.inflate(inflater, container, false)
         noteListAdapter = NoteListAdapter()
+        notesListBinding.notesList.adapter = noteListAdapter
         return notesListBinding.root
     }
 
     override fun onResume() {
         super.onResume()
         setupObservers()
+        viewModel.fetchNotes()
     }
 
     override fun onPause() {
