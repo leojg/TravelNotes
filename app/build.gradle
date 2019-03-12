@@ -35,6 +35,7 @@ project.ext {
     materialVersion = '1.0.0'
     coreKtxVersion = '1.0.1'
     koinVersion = '1.0.2'
+    roomVersion = '2.0.0'
 }
 
 dependencies {
@@ -52,6 +53,9 @@ dependencies {
     implementation "org.koin:koin-android:$project.ext.koinVersion"
     implementation "org.koin:koin-androidx-viewmodel:$project.ext.koinVersion"
 
+    //room
+    implementation "androidx.room:room-runtime:$project.ext.roomVersion"
+    kapt "androidx.room:room-compiler:$project.ext.roomVersion"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
