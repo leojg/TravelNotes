@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity(tableName = "Notes")
-class NotesEntity (
+class NoteEntity (
     @PrimaryKey val uid: Int = 0,
     val text: String,
     val date: Date,

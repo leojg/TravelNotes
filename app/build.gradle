@@ -36,6 +36,7 @@ project.ext {
     coreKtxVersion = '1.0.1'
     koinVersion = '1.0.2'
     roomVersion = '2.0.0'
+    corrutinesVersion = '1.0.0'
 }
 
 dependencies {
@@ -48,6 +49,9 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$project.ext.constraintLayoutVersion"
     implementation "androidx.recyclerview:recyclerview:$project.ext.recyclerViewVersion"
     implementation "androidx.core:core-ktx:$project.ext.coreKtxVersion"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$project.ext.corrutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$project.ext.corrutinesVersion"
 
     //koin
     implementation "org.koin:koin-android:$project.ext.koinVersion"

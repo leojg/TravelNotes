@@ -7,14 +7,19 @@ import lgcode.me.travelnotes.R
 import lgcode.me.travelnotes.core.ui.BaseActivity
 import lgcode.me.travelnotes.databinding.ActivityMainBinding
 import lgcode.me.travelnotes.features.noteslist.NotesListFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity: BaseActivity() {
 
+    private val viewModel by viewModel<MainViewModel>()
     private lateinit var mainBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        viewModel.populate()
+
         replaceFragment(NotesListFragment.newInstance(), getFragmentContainer())
     }
 

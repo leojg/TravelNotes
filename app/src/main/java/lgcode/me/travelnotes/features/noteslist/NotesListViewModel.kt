@@ -3,27 +3,18 @@ package lgcode.me.travelnotes.features.noteslist
 import androidx.lifecycle.MutableLiveData
 import lgcode.me.travelnotes.core.domain.Note
 import lgcode.me.travelnotes.core.viewmodel.BaseViewModel
-import java.util.*
+import lgcode.me.travelnotes.features.noteslist.usecase.GetNotesListUseCase
+import me.lgcode.balance.core.repository.Result
 
-class NotesListViewModel: BaseViewModel() {
+class NotesListViewModel(val getNotesListUseCase: GetNotesListUseCase): BaseViewModel() {
 
     val notesListLiveData = MutableLiveData<List<Note>>()
 
-    fun fetchNotes() {
-        val notesList = ArrayList<Note>()
-
-        val note1 = Note("summary", Date(), null)
-        val note2 = Note("summary2", Date(), null)
-        val note3 = Note("summary long long ago, but not as much as I would love", Date(), null)
-        val note4 = Note("summar4", Date(), null)
-
-        notesList.add(note1)
-        notesList.add(note2)
-        notesList.add(note3)
-        notesList.add(note4)
-
-        notesListLiveData.value = notesList
-
+    fun fetchNotes() = getNotesListUseCase {
+        when(it) {
+            is Result.Success -> notesListLiveData.value = it.value
+            else -> handleError(it as Result.Failure)
+        }
     }
 
 }

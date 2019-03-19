@@ -1,26 +1,26 @@
 package lgcode.me.travelnotes.features.noteslist
 
 import androidx.room.*
-import lgcode.me.travelnotes.core.domain.NotesEntity
+import lgcode.me.travelnotes.core.domain.NoteEntity
 import me.lgcode.balance.core.repository.local.BaseDao
 
 @Dao
-interface NotesDao: BaseDao<NotesEntity?> {
+interface NotesDao: BaseDao<NoteEntity?> {
 
     @Query("SELECT * FROM notes LIMIT 1")
-    override fun get(): NotesEntity?
+    override fun get(): NoteEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    override fun insert(input: NotesEntity?): Long?
+    override fun insert(input: NoteEntity?): Long?
 
     @Delete
-    override fun remove(input: NotesEntity?): Int
+    override fun remove(input: NoteEntity?): Int
 
     @Query("SELECT * FROM notes")
-    override fun getAll(): List<NotesEntity?>
+    override fun getAll(): List<NoteEntity?>
 
     @Update
-    override fun update(input: NotesEntity?): Int
+    override fun update(input: NoteEntity?): Int
 
 
 }

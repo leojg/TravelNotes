@@ -6,11 +6,11 @@ import java.util.*
 
 object Converters {
 
-    @JvmStatic @TypeConverter fun toDate(value: Long?): Date? = if (value == null) null else Date(value)
+    @JvmStatic @TypeConverter fun toDate(value: Long?): Date? = value?.let { Date(value) }
     @JvmStatic @TypeConverter fun toLong(value: Date?): Long? = value?.time
 
     @JvmStatic @TypeConverter fun toString(value: Uri?): String? = value?.toString()
-    @JvmStatic @TypeConverter fun fromUri(value: String?): Uri? = value.let { Uri.parse(value) }
+    @JvmStatic @TypeConverter fun fromUri(value: String?): Uri? = value?.let { Uri.parse(value) }
 
 
 }

@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import lgcode.me.travelnotes.core.domain.NotesEntity
+import lgcode.me.travelnotes.core.domain.NoteEntity
 import lgcode.me.travelnotes.features.noteslist.NotesDao
 
-@Database(entities = [NotesEntity::class], version = 1)
+@Database(entities = [NoteEntity::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class TravelNotesDatabase: RoomDatabase() {
 
