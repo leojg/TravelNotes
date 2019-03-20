@@ -1,4 +1,4 @@
-package me.lgcode.balance.core.repository.local.room
+package lgcode.me.travelnotes.core.repository.local.room
 
 import android.content.Context
 import androidx.room.Database

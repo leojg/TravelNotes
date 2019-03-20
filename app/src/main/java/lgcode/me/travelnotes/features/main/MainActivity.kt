@@ -5,6 +5,7 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import lgcode.me.travelnotes.R
 import lgcode.me.travelnotes.core.ui.BaseActivity
+import lgcode.me.travelnotes.core.ui.BaseFragment
 import lgcode.me.travelnotes.databinding.ActivityMainBinding
 import lgcode.me.travelnotes.features.noteslist.NotesListFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,13 +19,14 @@ class MainActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        viewModel.populate()
-
-        replaceFragment(NotesListFragment.newInstance(), getFragmentContainer())
+        replaceFragment(NotesListFragment.newInstance(), getFragmentContainer(), false)
     }
 
     override fun getRoot(): View = mainBinding.root
     override fun getFragmentContainer(): Int = R.id.main_container
 
+    fun replaceFragment(fragment: BaseFragment) {
+        replaceFragment(fragment, getFragmentContainer())
+    }
 
 }

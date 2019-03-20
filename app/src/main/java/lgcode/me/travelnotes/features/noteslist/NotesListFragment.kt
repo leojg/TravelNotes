@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import lgcode.me.travelnotes.core.ui.BaseFragment
 import lgcode.me.travelnotes.databinding.FragmentNotesListBinding
+import lgcode.me.travelnotes.features.main.MainActivity
+import lgcode.me.travelnotes.features.note.NoteFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotesListFragment: BaseFragment() {
@@ -23,6 +25,11 @@ class NotesListFragment: BaseFragment() {
         notesListBinding = FragmentNotesListBinding.inflate(inflater, container, false)
         noteListAdapter = NoteListAdapter()
         notesListBinding.notesList.adapter = noteListAdapter
+
+        notesListBinding.newNoteFab.setOnClickListener {
+            goToNoteFragment()
+        }
+
         return notesListBinding.root
     }
 
@@ -45,5 +52,9 @@ class NotesListFragment: BaseFragment() {
 
     fun clearObservers() {
         viewModel.notesListLiveData.removeObservers(this)
+    }
+
+    fun goToNoteFragment() {
+        (activity as MainActivity).replaceFragment(NoteFragment.newInstance(type = NoteFragment.NoteFragmentType.CREATE))
     }
 }

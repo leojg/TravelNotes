@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+        <androidx.constraintlayout.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-                android:id="@+id/note_date_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <TextView
+                    android:id="@+id/note_date_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
-        <TextView
-                android:id="@+id/note_summary_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <TextView
+                    android:id="@+id/note_summary_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/note_date_textview"/>
 
+        </androidx.constraintlayout.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
 </layout>

@@ -3,7 +3,7 @@ package lgcode.me.travelnotes.core.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import me.lgcode.balance.core.repository.Result
+import lgcode.me.travelnotes.core.repository.Result
 
 abstract class BaseViewModel: ViewModel() {
     val TAG = this.javaClass.canonicalName

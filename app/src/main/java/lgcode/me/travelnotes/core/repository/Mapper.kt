@@ -1,4 +1,4 @@
-package me.lgcode.balance.core.repository
+package lgcode.me.travelnotes.core.repository
 
 interface Mapper<I, O> {
 

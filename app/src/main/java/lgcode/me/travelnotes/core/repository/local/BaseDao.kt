@@ -1,14 +1,14 @@
-package me.lgcode.balance.core.repository.local
+package lgcode.me.travelnotes.core.repository.local
 
 interface BaseDao<T> {
 
     fun getAll(): List<T>
 
-    fun get(): T
+    fun getById(id: Int): T
 
     fun insert(input: T): Long?
 
-    fun remove(input: T): Int
-
     fun update(input: T): Int
+
+    fun remove(input: T): Int
 }

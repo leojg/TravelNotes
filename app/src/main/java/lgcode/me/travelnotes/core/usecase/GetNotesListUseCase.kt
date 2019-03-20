@@ -1,10 +1,9 @@
-package lgcode.me.travelnotes.features.noteslist.usecase
+package lgcode.me.travelnotes.core.usecase
 
 import lgcode.me.travelnotes.core.domain.Note
 import lgcode.me.travelnotes.core.mapper.NotesMapper
 import lgcode.me.travelnotes.features.noteslist.NotesDao
-import me.lgcode.balance.core.repository.Result
-import me.lgcode.balance.core.usecase.UseCase
+import lgcode.me.travelnotes.core.repository.Result
 
 class GetNotesListUseCase(val notesDao: NotesDao): UseCase<List<Note>, Void>() {
     override suspend fun run(params: Void?): Result<List<Note>> {

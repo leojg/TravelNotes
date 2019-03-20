@@ -3,8 +3,8 @@ package lgcode.me.travelnotes.features.noteslist
 import androidx.lifecycle.MutableLiveData
 import lgcode.me.travelnotes.core.domain.Note
 import lgcode.me.travelnotes.core.viewmodel.BaseViewModel
-import lgcode.me.travelnotes.features.noteslist.usecase.GetNotesListUseCase
-import me.lgcode.balance.core.repository.Result
+import lgcode.me.travelnotes.core.usecase.GetNotesListUseCase
+import lgcode.me.travelnotes.core.repository.Result
 
 class NotesListViewModel(val getNotesListUseCase: GetNotesListUseCase): BaseViewModel() {
 

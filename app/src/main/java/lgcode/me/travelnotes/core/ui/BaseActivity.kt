@@ -11,9 +11,13 @@ abstract class BaseActivity: AppCompatActivity() {
 
     lateinit var currentFragment: BaseFragment
 
-    fun replaceFragment(newFragment: BaseFragment, @IdRes container: Int) {
+    fun replaceFragment(newFragment: BaseFragment, @IdRes container: Int, addToBackStack: Boolean = true) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(container, newFragment as Fragment).commit()
+        fragmentTransaction.replace(container, newFragment as Fragment)
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(newFragment.TAG)
+        }
+        fragmentTransaction.commit()
         currentFragment = newFragment
     }
 

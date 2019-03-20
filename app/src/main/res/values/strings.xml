@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">TravelNotes</string>
+
+    <string name="note_title_label">Note title</string>
+    <string name="note_text_label">Note placeholder</string>
+    <string name="note_date_label">Note date</string>
+    <string name="note_images_label">Add photos</string>
+
 </resources>

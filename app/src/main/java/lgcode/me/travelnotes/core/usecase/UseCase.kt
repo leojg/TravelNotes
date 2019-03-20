@@ -1,10 +1,10 @@
-package me.lgcode.balance.core.usecase
+package lgcode.me.travelnotes.core.usecase
 
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import me.lgcode.balance.core.repository.Result
+import lgcode.me.travelnotes.core.repository.Result
 
 abstract class UseCase<out T, in P> where T: Any {
     abstract suspend fun run(params: P?): Result<T>
