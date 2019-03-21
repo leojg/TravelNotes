@@ -7,7 +7,8 @@ import java.util.*
 
 @Parcelize
 data class Note(
-    val text: String,
+    val title: String? = null,
+    val body: String,
     val date: Date,
-    var image: Uri?
+    var image: Uri? = null
 ): Parcelable

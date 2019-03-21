@@ -8,7 +8,8 @@ import java.util.*
 @Entity(tableName = "Notes")
 class NoteEntity (
     @PrimaryKey val uid: Int = 0,
-    val text: String,
+    val title: String? = null,
+    val body: String,
     val date: Date,
-    var image: Uri?
+    var image: Uri? = null
 )

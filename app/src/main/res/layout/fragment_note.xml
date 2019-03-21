@@ -3,6 +3,10 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable name="viewModel" type="lgcode.me.travelnotes.features.note.NoteViewModel"/>
+    </data>
+
     <androidx.constraintlayout.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -18,34 +22,31 @@
                     android:id="@+id/note_title_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/note_title_label"/>
+                    android:hint="@string/note_title_label"
+                    android:text="@{viewModel.noteTitle}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/note_date_input_layout"
+        <TextView
+                android:id="@+id/note_date_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/note_title_text_input_layout"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/note_date_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/note_date_label"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/note_body_text_input_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/note_date_input_layout"
+                app:layout_constraintTop_toBottomOf="@+id/note_date_textview"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
             <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/note_body_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/note_text_label"
+                    android:text="@{viewModel.noteBody}"
                     android:inputType="textMultiLine"/>
         </com.google.android.material.textfield.TextInputLayout>
 
