@@ -23,7 +23,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/note_title_label"
-                    android:text="@{viewModel.noteTitle}"/>
+                    android:text="@={viewModel.noteTitle}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -38,7 +38,7 @@
                 android:id="@+id/note_body_text_input_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/note_date_textview"
+                app:layout_constraintTop_toBottomOf="@+id/note_date_textView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
             <com.google.android.material.textfield.TextInputEditText
@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/note_text_label"
-                    android:text="@{viewModel.noteBody}"
+                    android:text="@={viewModel.noteBody}"
                     android:inputType="textMultiLine"/>
         </com.google.android.material.textfield.TextInputLayout>
 

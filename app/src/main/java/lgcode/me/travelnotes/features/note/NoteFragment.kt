@@ -3,16 +3,15 @@ package lgcode.me.travelnotes.features.note
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.lifecycle.Observer
+import lgcode.me.travelnotes.R
 import lgcode.me.travelnotes.core.domain.Note
 import lgcode.me.travelnotes.core.ui.BaseFragment
 import lgcode.me.travelnotes.databinding.FragmentNoteBinding
+import lgcode.me.travelnotes.features.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
-import androidx.lifecycle.Observer
-import lgcode.me.travelnotes.R
 import java.util.*
 
 class NoteFragment: BaseFragment() {
@@ -44,6 +43,11 @@ class NoteFragment: BaseFragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         noteBinding = FragmentNoteBinding.inflate(inflater, container, false)
+        noteBinding.viewModel = viewModel
+
+        viewModel.noteTitle.set("test mc test")
+
+        setHasOptionsMenu(true)
 
         noteBinding.noteDateTextView.setOnClickListener{
             it.isEnabled = false
@@ -70,6 +74,11 @@ class NoteFragment: BaseFragment() {
         viewModel.noteCalendar.observe(this, Observer { calendar ->
             updateDate(calendar.time)
         })
+        viewModel.operationStatus.observe(this, Observer {
+            if (it) {
+                fragmentManager!!.popBackStack()
+            }
+        })
     }
 
     fun clearObservers() {
@@ -87,6 +96,20 @@ class NoteFragment: BaseFragment() {
         calendar.set(year, day, month)
         noteBinding.noteDateTextView.isEnabled = true
         updateDate(calendar.time)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater!!.inflate(R.menu.menu_create_note, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        item?.let {
+            when(it.itemId) {
+                R.id.action_save_note -> viewModel.saveNote()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

@@ -6,4 +6,9 @@
     <string name="note_date_label">Date: %s</string>
     <string name="note_images_label">Add photos</string>
 
+    <string name="home_title">@string/app_name</string>
+    <string name="create_note_title">Create a Note</string>
+
+    <string name="menu_save_note">Save</string>
+
 </resources>
