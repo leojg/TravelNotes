@@ -3,6 +3,14 @@
     
     <dimen name="height_medium">50dp</dimen>
 
-    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="padding_margin_xsmall">4dp</dimen>
+    <dimen name="padding_margin_small">8dp</dimen>
+    <dimen name="padding_margin_medium">16dp</dimen>
+
+    <dimen name="font_small">12dp</dimen>
+    <dimen name="font_medium">16dp</dimen>
+    <dimen name="font_large">20dp</dimen>
+
+    <dimen name="elevation_medium">4dp</dimen>
 
 </resources>

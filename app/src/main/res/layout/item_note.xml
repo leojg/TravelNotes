@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
+            style="@style/NoteItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <androidx.constraintlayout.ConstraintLayout
@@ -9,19 +10,20 @@
                 android:layout_height="wrap_content">
 
             <TextView
-                    android:id="@+id/note_date_textview"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
-            <TextView
+                    style="@style/NoteItem.Summary"
                     android:id="@+id/note_summary_textview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                    style="@style/NoteItem.Date"
+                    android:id="@+id/note_date_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/note_date_textview"/>
+                    app:layout_constraintTop_toBottomOf="@+id/note_summary_textview"/>
 
         </androidx.constraintlayout.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -91,7 +91,7 @@ class NoteFragment: BaseFragment() {
 
     }
 
-    val datePickerListener = DatePickerDialog.OnDateSetListener { datePicker, year, day, month ->
+    val datePickerListener = DatePickerDialog.OnDateSetListener { _, year, day, month ->
         val calendar = viewModel.noteCalendar.value!!
         calendar.set(year, day, month)
         noteBinding.noteDateTextView.isEnabled = true

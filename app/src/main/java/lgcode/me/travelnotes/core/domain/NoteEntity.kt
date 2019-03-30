@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity(tableName = "Notes")
 class NoteEntity (
-    @PrimaryKey val uid: Int = 0,
+    @PrimaryKey(autoGenerate = true) val uid: Long = 0,
     val title: String? = null,
     val body: String,
     val date: Date,

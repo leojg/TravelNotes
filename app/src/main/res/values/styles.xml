@@ -13,4 +13,23 @@
         <item name="android:titleTextColor">@color/colorAccent</item>
     </style>
 
+    <style name="NoteItem">
+        <item name="android:elevation">@dimen/elevation_medium</item>
+        <item name="android:padding">@dimen/padding_margin_small</item>
+        <item name="android:layout_marginBottom">@dimen/padding_margin_xsmall</item>
+    </style>
+
+    <style name="NoteItem.Date">
+        <item name="android:textSize">@dimen/font_small</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:color">@color/light_grey</item>
+        <item name="android:textAlignment">viewEnd</item>
+    </style>
+
+    <style name="NoteItem.Summary">
+        <item name="android:textSize">@dimen/font_large</item>
+        <item name="android:color">@color/dark_grey</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
