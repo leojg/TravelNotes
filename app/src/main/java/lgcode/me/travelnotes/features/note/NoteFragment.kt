@@ -45,8 +45,6 @@ class NoteFragment: BaseFragment() {
         noteBinding = FragmentNoteBinding.inflate(inflater, container, false)
         noteBinding.viewModel = viewModel
 
-        viewModel.noteTitle.set("test mc test")
-
         setHasOptionsMenu(true)
 
         noteBinding.noteDateTextView.setOnClickListener{

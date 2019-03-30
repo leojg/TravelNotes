@@ -22,7 +22,7 @@ class NoteListAdapter: RecyclerView.Adapter<NoteListAdapter.NoteListViewHolder>(
 
     override fun onBindViewHolder(holder: NoteListViewHolder, position: Int) {
         notesList[position].let {
-            holder.binding.noteSummaryTextview.text = it.body
+            holder.binding.noteSummaryTextview.text = if (it.title.isNullOrEmpty()) it.body else it.title
             holder.binding.noteDateTextview.text = DateFormat.getDateInstance().format(it.date)
         }
     }

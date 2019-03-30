@@ -10,7 +10,7 @@
 
     <style name="Toolbar">
         <item name="android:background">@color/colorPrimaryDark</item>
-        <item name="android:titleTextColor">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/colorAccent</item>
     </style>
 
     <style name="NoteItem">
