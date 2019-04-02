@@ -2,9 +2,12 @@ package lgcode.me.travelnotes.features.noteslist
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
+import lgcode.me.travelnotes.core.domain.Note
 import lgcode.me.travelnotes.core.ui.BaseFragment
 import lgcode.me.travelnotes.databinding.FragmentNotesListBinding
 import lgcode.me.travelnotes.features.main.MainActivity
@@ -23,11 +26,11 @@ class NotesListFragment: BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         notesListBinding = FragmentNotesListBinding.inflate(inflater, container, false)
-        noteListAdapter = NoteListAdapter()
+        noteListAdapter = NoteListAdapter(this)
         notesListBinding.notesList.adapter = noteListAdapter
 
         notesListBinding.newNoteFab.setOnClickListener {
-            goToNoteFragment()
+            goToCreateNoteFragment()
         }
 
         return notesListBinding.root
@@ -54,7 +57,13 @@ class NotesListFragment: BaseFragment() {
         viewModel.notesListLiveData.removeObservers(this)
     }
 
-    fun goToNoteFragment() {
+    fun goToCreateNoteFragment() {
         (activity as MainActivity).replaceFragment(NoteFragment.newInstance(type = NoteFragment.NoteFragmentType.CREATE))
+    }
+
+    fun goToViewNoteFragment(note: Note) {
+        (activity as MainActivity).replaceFragment(NoteFragment.newInstance(
+            type = NoteFragment.NoteFragmentType.VIEW,
+            note = note))
     }
 }

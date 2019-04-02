@@ -7,4 +7,16 @@
         android:title="@string/menu_save_note"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/action_edit_note"
+        android:title="@string/menu_edit_note"
+        app:showAsAction="always"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/action_update_note"
+        android:title="@string/menu_update_note"
+        app:showAsAction="always"
+        android:visible="false"/>s
+
 </menu>

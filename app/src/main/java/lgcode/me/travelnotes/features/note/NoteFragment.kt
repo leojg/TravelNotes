@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import lgcode.me.travelnotes.R
 import lgcode.me.travelnotes.core.domain.Note
@@ -39,6 +40,8 @@ class NoteFragment: BaseFragment() {
 
     private val viewModel by viewModel<NoteViewModel>()
     private lateinit var noteBinding: FragmentNoteBinding
+    var noteFragmentType = NoteFragmentType.CREATE
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,6 +49,14 @@ class NoteFragment: BaseFragment() {
         noteBinding.viewModel = viewModel
 
         setHasOptionsMenu(true)
+
+        val noteFragmentType =  NoteFragmentType.valueOf(arguments!!.getString(FRAGMENT_TYPE)!!)
+        if (noteFragmentType != NoteFragmentType.CREATE) {
+            viewModel.setNote(arguments!!.get(FRAGMENT_NOTE) as Note)
+        }
+        if (noteFragmentType == NoteFragmentType.VIEW) {
+            startViewMode()
+        }
 
         noteBinding.noteDateTextView.setOnClickListener{
             it.isEnabled = false
@@ -98,6 +109,17 @@ class NoteFragment: BaseFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.menu_create_note, menu)
+        when(noteFragmentType) {
+            NoteFragmentType.VIEW -> {
+                menu?.let {
+                    val itemSave = menu.findItem(R.id.action_save_note)
+                    val itemEdit = menu.findItem(R.id.action_save_note)
+                    itemSave.isVisible = false
+                    itemEdit.isVisible = true
+                }
+            }
+        }
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -105,9 +127,25 @@ class NoteFragment: BaseFragment() {
         item?.let {
             when(it.itemId) {
                 R.id.action_save_note -> viewModel.saveNote()
+                R.id.action_edit_note -> startEditMode()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun startEditMode() {
+        noteFragmentType = NoteFragmentType.EDIT
+        noteBinding.noteDateTextView.isEnabled = true
+        noteBinding.noteTitleEditText.isEnabled = true
+        noteBinding.noteBodyEditText.isEnabled = true
+        noteBinding.noteAddImagesButton.visibility = View.VISIBLE
+    }
+
+    fun startViewMode() {
+        noteBinding.noteDateTextView.isEnabled = false
+        noteBinding.noteTitleEditText.isEnabled = false
+        noteBinding.noteBodyEditText.isEnabled = false
+        noteBinding.noteAddImagesButton.visibility = View.GONE
     }
 
 }

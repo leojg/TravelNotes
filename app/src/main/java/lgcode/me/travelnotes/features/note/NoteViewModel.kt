@@ -49,4 +49,14 @@ class NoteViewModel(
 
     }
 
+    fun setNote(note: Note?) {
+        if (note != null) {
+            noteTitle.set(note.title)
+            noteBody.set(note.body)
+            noteCalendar.value!!.time = note.date
+        } else {
+            error.value = "Error showing note"
+        }
+    }
+
 }
