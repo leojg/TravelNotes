@@ -41,6 +41,7 @@ class NoteFragment: BaseFragment() {
     private val viewModel by viewModel<NoteViewModel>()
     private lateinit var noteBinding: FragmentNoteBinding
     var noteFragmentType = NoteFragmentType.CREATE
+    private lateinit var menu: Menu
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -50,7 +51,7 @@ class NoteFragment: BaseFragment() {
 
         setHasOptionsMenu(true)
 
-        val noteFragmentType =  NoteFragmentType.valueOf(arguments!!.getString(FRAGMENT_TYPE)!!)
+        noteFragmentType =  NoteFragmentType.valueOf(arguments!!.getString(FRAGMENT_TYPE)!!)
         if (noteFragmentType != NoteFragmentType.CREATE) {
             viewModel.setNote(arguments!!.get(FRAGMENT_NOTE) as Note)
         }
@@ -109,17 +110,17 @@ class NoteFragment: BaseFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.menu_create_note, menu)
-        when(noteFragmentType) {
-            NoteFragmentType.VIEW -> {
-                menu?.let {
+        menu?.let {
+            when(noteFragmentType) {
+                NoteFragmentType.VIEW -> {
                     val itemSave = menu.findItem(R.id.action_save_note)
-                    val itemEdit = menu.findItem(R.id.action_save_note)
+                    val itemEdit = menu.findItem(R.id.action_edit_note)
                     itemSave.isVisible = false
                     itemEdit.isVisible = true
                 }
             }
+            this.menu = menu
         }
-
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -128,6 +129,7 @@ class NoteFragment: BaseFragment() {
             when(it.itemId) {
                 R.id.action_save_note -> viewModel.saveNote()
                 R.id.action_edit_note -> startEditMode()
+                R.id.action_update_note -> viewModel.updateNote()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -139,6 +141,11 @@ class NoteFragment: BaseFragment() {
         noteBinding.noteTitleEditText.isEnabled = true
         noteBinding.noteBodyEditText.isEnabled = true
         noteBinding.noteAddImagesButton.visibility = View.VISIBLE
+        val itemEdit = menu.findItem(R.id.action_edit_note)
+        val itemUpdate = menu.findItem(R.id.action_update_note)
+        itemEdit.isVisible = false
+        itemUpdate.isVisible = true
+
     }
 
     fun startViewMode() {
