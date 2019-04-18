@@ -31,4 +31,9 @@ class MainActivity: BaseActivity() {
         replaceFragment(fragment, getFragmentContainer())
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
 }

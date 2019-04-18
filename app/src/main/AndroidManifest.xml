@@ -7,7 +7,8 @@
                  android:supportsRtl="true"
                  android:theme="@style/AppTheme"
                  android:name=".core.MainApplication">
-        <activity android:name=".features.main.MainActivity">
+        <activity android:name=".features.main.MainActivity"
+                  android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

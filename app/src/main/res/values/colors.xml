@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/dark_grey</color>
-    <color name="colorPrimaryDark">@color/brick_red</color>
-    <color name="colorAccent">@color/gold</color>
+    <color name="colorPrimary">@color/marzipan</color>
+    <color name="colorPrimaryDark">@color/sandy_brown</color>
+    <color name="colorAccent">@color/brick_red</color>
 
     <color name="white">#FBFBFB</color>
     <color name="light_grey">#989999</color>
     <color name="dark_grey">#343E49</color>
     <color name="gold">#FFC107</color>
-    <color name="brick_red">#CC4031</color>
+    <color name="brick_red">#BF360C</color>
+    <color name="red">#D32F2F</color>
+
+    <color name="smalt_blue">#4c8492</color>
+    <color name="sandy_brown">#f09c67</color>
+    <color name="marzipan">#f7e0a3</color>
+    <color name="travertine">#F8F7EB</color>
 </resources>

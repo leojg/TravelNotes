@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.*
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import lgcode.me.travelnotes.R
 import lgcode.me.travelnotes.core.domain.Note
@@ -12,7 +11,7 @@ import lgcode.me.travelnotes.core.ui.BaseFragment
 import lgcode.me.travelnotes.databinding.FragmentNoteBinding
 import lgcode.me.travelnotes.features.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.text.SimpleDateFormat
+    import java.text.SimpleDateFormat
 import java.util.*
 
 class NoteFragment: BaseFragment() {
@@ -50,6 +49,7 @@ class NoteFragment: BaseFragment() {
         noteBinding.viewModel = viewModel
 
         setHasOptionsMenu(true)
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         noteFragmentType =  NoteFragmentType.valueOf(arguments!!.getString(FRAGMENT_TYPE)!!)
         if (noteFragmentType != NoteFragmentType.CREATE) {
@@ -78,6 +78,11 @@ class NoteFragment: BaseFragment() {
     override fun onPause() {
         super.onPause()
         clearObservers()
+    }
+
+    override fun onDestroy() {
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        super.onDestroy()
     }
 
     fun setupObservers() {
@@ -109,7 +114,7 @@ class NoteFragment: BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater!!.inflate(R.menu.menu_create_note, menu)
+        inflater!!.inflate(R.menu.menu_note, menu)
         menu?.let {
             when(noteFragmentType) {
                 NoteFragmentType.VIEW -> {
@@ -143,8 +148,10 @@ class NoteFragment: BaseFragment() {
         noteBinding.noteAddImagesButton.visibility = View.VISIBLE
         val itemEdit = menu.findItem(R.id.action_edit_note)
         val itemUpdate = menu.findItem(R.id.action_update_note)
+        val itemDelete = menu.findItem(R.id.action_delete_note)
         itemEdit.isVisible = false
         itemUpdate.isVisible = true
+        itemDelete.isVisible = true
 
     }
 

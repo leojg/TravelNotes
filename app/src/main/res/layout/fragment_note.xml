@@ -12,13 +12,14 @@
             android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputLayout
+                android:theme="@style/NoteFragmentField"
                 android:id="@+id/note_title_text_input_layout"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/height_medium"
-                app:hintAnimationEnabled="false"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
             <com.google.android.material.textfield.TextInputEditText
+                    style="@style/NoteFragmentField.Value"
                     android:id="@+id/note_title_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -27,14 +28,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+                style="@style/NoteFragmentDateField"
                 android:id="@+id/note_date_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:text="placeholder"
                 app:layout_constraintTop_toBottomOf="@+id/note_title_text_input_layout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
+                android:theme="@style/NoteFragmentField"
                 android:id="@+id/note_body_text_input_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -42,6 +46,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
             <com.google.android.material.textfield.TextInputEditText
+                    style="@style/NoteFragmentField.Value"
                     android:id="@+id/note_body_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -51,12 +56,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+                style="@style/NoteFragmentPhotosButton"
                 android:id="@+id/note_add_images_button"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/height_medium"
-                android:drawableStart="@android:drawable/ic_menu_camera"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@android:drawable/ic_menu_camera"
                 android:text="@string/note_images_label"
-                android:gravity="center"
                 app:layout_constraintTop_toBottomOf="@+id/note_body_text_input_layout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
