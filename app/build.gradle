@@ -41,6 +41,7 @@ project.ext {
     koinVersion = '1.0.2'
     roomVersion = '2.0.0'
     corrutinesVersion = '1.0.0'
+    picasoVersion = '2.71828'
 }
 
 dependencies {
@@ -61,6 +62,8 @@ dependencies {
     implementation "org.koin:koin-android:$project.ext.koinVersion"
     implementation "org.koin:koin-androidx-viewmodel:$project.ext.koinVersion"
 
+    //picasso
+    implementation "com.squareup.picasso:picasso:$project.ext.picasoVersion"
     //room
     implementation "androidx.room:room-runtime:$project.ext.roomVersion"
     kapt "androidx.room:room-compiler:$project.ext.roomVersion"

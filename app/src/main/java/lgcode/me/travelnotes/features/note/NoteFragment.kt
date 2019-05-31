@@ -9,6 +9,7 @@ import lgcode.me.travelnotes.R
 import lgcode.me.travelnotes.core.domain.Note
 import lgcode.me.travelnotes.core.ui.BaseFragment
 import lgcode.me.travelnotes.databinding.FragmentNoteBinding
+import lgcode.me.travelnotes.features.gallery.GalleryActivity
 import lgcode.me.travelnotes.features.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
     import java.text.SimpleDateFormat
@@ -65,6 +66,12 @@ class NoteFragment: BaseFragment() {
             DatePickerDialog(this.context!!, datePickerListener,
                 calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
                 .show()
+        }
+
+        noteBinding.noteAddImagesButton.setOnClickListener {
+            val dialog = NotePictureSourceDialogFragment()
+            dialog.setTargetFragment(this, 0)
+            dialog.show(fragmentManager!!, "test")
         }
 
         return noteBinding.root
@@ -138,6 +145,21 @@ class NoteFragment: BaseFragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun onPictureDialogResponse(response: Int) {
+        if (response == 1) {
+            //show camera
+        } else if (response == 2) {
+            //show gallery
+            if ((activity as MainActivity).checkGalleryPermissions()) {
+                showGallery()
+            }
+        }
+    }
+
+    fun showGallery() {
+        startActivity(GalleryActivity.newIntent(context!!))
     }
 
     fun startEditMode() {

@@ -13,9 +13,8 @@ class NoteListAdapter(var noteListFragment: NotesListFragment): RecyclerView.Ada
 
     private val notesList = ArrayList<Note>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteListViewHolder {
-        return NoteListViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_note, parent, false))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        NoteListViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_note, parent, false))
 
     override fun getItemCount() = notesList.size
 
