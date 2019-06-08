@@ -10,6 +10,8 @@
     <string name="gallery_title">Gallery</string>
     <string name="create_note_title">Create a Note</string>
 
+    <string name="note_delete_label">Delete</string>
+
     <string name="menu_save_note">Save</string>
     <string name="menu_edit_note">Edit</string>
     <string name="menu_update_note">Update</string>

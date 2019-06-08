@@ -1,8 +1,10 @@
 package lgcode.me.travelnotes.features.noteslist
 
+import android.graphics.Canvas
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import lgcode.me.travelnotes.R
 import lgcode.me.travelnotes.core.domain.Note
@@ -32,6 +34,11 @@ class NoteListAdapter(var noteListFragment: NotesListFragment): RecyclerView.Ada
         notesList.clear()
         notesList.addAll(notes)
         notifyDataSetChanged()
+    }
+
+    fun popItem(position: Int): Note {
+        val note = notesList.removeAt(position)
+        return note
     }
 
     class NoteListViewHolder(val binding: ItemNoteBinding): RecyclerView.ViewHolder(binding.root)

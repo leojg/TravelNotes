@@ -12,7 +12,8 @@ import java.util.*
 
 class NoteViewModel(
     val createNoteUseCase: CreateNoteUseCase,
-    val updateNoteUserCase: UpdateNoteUseCase): BaseViewModel() {
+    val updateNoteUserCase: UpdateNoteUseCase,
+    val deleteNoteUserCase: DeleteNoteUseCase): BaseViewModel() {
 
     val operationStatus = MutableLiveData<Boolean>()
 
@@ -40,9 +41,23 @@ class NoteViewModel(
         }
     }
 
-    fun  updateNote() {
+    fun updateNote() {
         buildNote()?.let { note ->
             updateNoteUserCase(note) {
+                when(it) {
+                    is Result.Success -> operationStatus.value = true
+                    is Result.Failure -> {
+                        operationStatus.value = false
+                        handleError(it)
+                    }
+                }
+            }
+        }
+    }
+
+    fun deleteNote() {
+        if (::note.isInitialized) {
+            deleteNoteUserCase(note) {
                 when(it) {
                     is Result.Success -> operationStatus.value = true
                     is Result.Failure -> {

@@ -24,8 +24,8 @@ val appModule = module {
     single { UpdateNoteUseCase(get<TravelNotesDatabase>().entryDao()) }
 
     //ViewModels
-    viewModel { NotesListViewModel(get()) }
-    viewModel { NoteViewModel(get(), get()) }
+    viewModel { NotesListViewModel(get(), get()) }
+    viewModel { NoteViewModel(get(), get(), get()) }
     viewModel { MainViewModel(get(), get()) }
 
 }

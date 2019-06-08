@@ -13,6 +13,8 @@
     <dimen name="font_medium">16dp</dimen>
     <dimen name="font_large">20dp</dimen>
 
+    <dimen name="note_list_delete_icon_size">20dp</dimen>
+
     <dimen name="elevation_medium">4dp</dimen>
 
 </resources>

@@ -23,6 +23,20 @@
         <item name="color">@color/colorAccent</item>
     </style>
 
+    <style name="NoteItemBackgroundView">
+        <item name="android:background">@color/red</item>
+    </style>
+
+    <style name="NoteItemBackgroundViewText">
+        <item name="android:color">@color/dark_grey</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/font_medium</item>
+    </style>
+
+    <style name="NoteItemBackgroundViewImage">
+        <item name="android:color">@color/dark_grey</item>
+    </style>
+
     <style name="NoteItem">
         <item name="android:elevation">@dimen/elevation_medium</item>
         <item name="android:padding">@dimen/padding_margin_small</item>

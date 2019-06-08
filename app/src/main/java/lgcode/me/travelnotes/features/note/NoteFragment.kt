@@ -142,6 +142,7 @@ class NoteFragment: BaseFragment() {
                 R.id.action_save_note -> viewModel.saveNote()
                 R.id.action_edit_note -> startEditMode()
                 R.id.action_update_note -> viewModel.updateNote()
+                R.id.action_delete_note -> viewModel.deleteNote()
             }
         }
         return super.onOptionsItemSelected(item)
