@@ -28,13 +28,13 @@
     </style>
 
     <style name="NoteItemBackgroundViewText">
-        <item name="android:color">@color/dark_grey</item>
+        <item name="android:color">@color/travertine</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/font_medium</item>
     </style>
 
     <style name="NoteItemBackgroundViewImage">
-        <item name="android:color">@color/dark_grey</item>
+        <item name="android:tint">@color/travertine</item>
     </style>
 
     <style name="NoteItem">
@@ -105,6 +105,12 @@
         <item name="android:textSize">@dimen/font_large</item>
         <item name="android:textColor">@color/smalt_blue</item>
         <item name="android:background">@drawable/textview_with_underline</item>
+    </style>
+
+    <style name="NoteFragmentPhotoList">
+        <item name="android:layout_marginTop">@dimen/padding_margin_medium</item>
+        <item name="android:layout_marginStart">@dimen/padding_margin_large</item>
+        <item name="android:layout_marginEnd">@dimen/padding_margin_large</item>
     </style>
 
 </resources>

@@ -1,6 +1,6 @@
 package lgcode.me.travelnotes.features.main
 
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.Manifest.permission.*
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
@@ -19,6 +19,7 @@ class MainActivity: BaseActivity() {
 
     companion object {
         const val SHOW_GALLERY_PERMISSION_REQUEST_CODE = 1
+        const val OPEN_CAMERA_PERMISSION_REQUEST_CODE = 2
     }
 
     private val viewModel by viewModel<MainViewModel>()
@@ -46,7 +47,11 @@ class MainActivity: BaseActivity() {
     }
 
     fun checkGalleryPermissions(): Boolean {
-        return checkPermissions(listOf(WRITE_EXTERNAL_STORAGE), SHOW_GALLERY_PERMISSION_REQUEST_CODE)
+        return checkPermissions(listOf(WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE), SHOW_GALLERY_PERMISSION_REQUEST_CODE)
+    }
+
+    fun checkCameraPermissions(): Boolean {
+        return checkPermissions(listOf(CAMERA), OPEN_CAMERA_PERMISSION_REQUEST_CODE)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -56,6 +61,13 @@ class MainActivity: BaseActivity() {
                     (currentFragment as NoteFragment).showGallery()
                 } else {
                     Toast.makeText(this, "W U NO GIB", Toast.LENGTH_LONG).show()
+                }
+            }
+            OPEN_CAMERA_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    (currentFragment as NoteFragment).openCamera()
+                } else {
+                    Toast.makeText(this, "W U NO GIB CAM", Toast.LENGTH_LONG).show()
                 }
             }
 

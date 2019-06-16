@@ -11,10 +11,10 @@ data class Note(
     val title: String? = null,
     val body: String,
     val date: Date,
-    var image: Uri? = null
+    var images: MutableList<Uri>? = null
 ): Parcelable {
 
-    constructor(title: String? = null, body: String, date: Date, image: Uri? = null):
-            this(null, title, body, date, image)
+    constructor(title: String? = null, body: String, date: Date, images: MutableList<Uri>? = null):
+            this(null, title, body, date, images)
 
 }

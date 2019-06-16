@@ -1,18 +1,30 @@
 package lgcode.me.travelnotes.features.note
 
 import android.annotation.SuppressLint
+import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
+import android.content.ContentValues
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.*
+import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
+import lgcode.me.travelnotes.BuildConfig
 import lgcode.me.travelnotes.R
 import lgcode.me.travelnotes.core.domain.Note
 import lgcode.me.travelnotes.core.ui.BaseFragment
+import lgcode.me.travelnotes.core.util.addPhotoToGallery
+import lgcode.me.travelnotes.core.util.createImageFile
 import lgcode.me.travelnotes.databinding.FragmentNoteBinding
 import lgcode.me.travelnotes.features.gallery.GalleryActivity
 import lgcode.me.travelnotes.features.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
-    import java.text.SimpleDateFormat
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
 class NoteFragment: BaseFragment() {
@@ -25,6 +37,8 @@ class NoteFragment: BaseFragment() {
 
         const val FRAGMENT_NOTE = "FRAGMENT_NOTE"
         const val FRAGMENT_TYPE = "FRAGMENT_TYPE"
+
+        const val REQUEST_IMAGE_CAPTURE = 201
 
         fun newInstance(note: Note? = null, type: NoteFragmentType): NoteFragment {
             val bundle = Bundle()
@@ -42,6 +56,9 @@ class NoteFragment: BaseFragment() {
     private lateinit var noteBinding: FragmentNoteBinding
     var noteFragmentType = NoteFragmentType.CREATE
     private lateinit var menu: Menu
+    private lateinit var notePhotoAdapter: NotePhotoListAdapter
+
+    private lateinit var photoUri: Uri
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -51,14 +68,6 @@ class NoteFragment: BaseFragment() {
 
         setHasOptionsMenu(true)
         (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
-        noteFragmentType =  NoteFragmentType.valueOf(arguments!!.getString(FRAGMENT_TYPE)!!)
-        if (noteFragmentType != NoteFragmentType.CREATE) {
-            viewModel.setNote(arguments!!.get(FRAGMENT_NOTE) as Note)
-        }
-        if (noteFragmentType == NoteFragmentType.VIEW) {
-            startViewMode()
-        }
 
         noteBinding.noteDateTextView.setOnClickListener{
             it.isEnabled = false
@@ -71,7 +80,22 @@ class NoteFragment: BaseFragment() {
         noteBinding.noteAddImagesButton.setOnClickListener {
             val dialog = NotePictureSourceDialogFragment()
             dialog.setTargetFragment(this, 0)
-            dialog.show(fragmentManager!!, "test")
+            dialog.show(fragmentManager!!, "photo_source")
+        }
+
+        notePhotoAdapter = NotePhotoListAdapter(this.context!!)
+        noteBinding.notePhotosList.adapter = notePhotoAdapter
+
+        noteFragmentType =  NoteFragmentType.valueOf(arguments!!.getString(FRAGMENT_TYPE)!!)
+        if (noteFragmentType != NoteFragmentType.CREATE) {
+            viewModel.setNote(arguments!!.get(FRAGMENT_NOTE) as Note)
+
+            viewModel.notePhotoUris?.let {
+                notePhotoAdapter.addItems(it)
+            }
+        }
+        if (noteFragmentType == NoteFragmentType.VIEW) {
+            startViewMode()
         }
 
         return noteBinding.root
@@ -123,13 +147,11 @@ class NoteFragment: BaseFragment() {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.menu_note, menu)
         menu?.let {
-            when(noteFragmentType) {
-                NoteFragmentType.VIEW -> {
-                    val itemSave = menu.findItem(R.id.action_save_note)
-                    val itemEdit = menu.findItem(R.id.action_edit_note)
-                    itemSave.isVisible = false
-                    itemEdit.isVisible = true
-                }
+            if (noteFragmentType == NoteFragmentType.VIEW) {
+                val itemSave = menu.findItem(R.id.action_save_note)
+                val itemEdit = menu.findItem(R.id.action_edit_note)
+                itemSave.isVisible = false
+                itemEdit.isVisible = true
             }
             this.menu = menu
         }
@@ -150,9 +172,10 @@ class NoteFragment: BaseFragment() {
 
     fun onPictureDialogResponse(response: Int) {
         if (response == 1) {
-            //show camera
+            if ((activity as MainActivity).checkCameraPermissions()) {
+                openCamera()
+            }
         } else if (response == 2) {
-            //show gallery
             if ((activity as MainActivity).checkGalleryPermissions()) {
                 showGallery()
             }
@@ -161,6 +184,19 @@ class NoteFragment: BaseFragment() {
 
     fun showGallery() {
         startActivity(GalleryActivity.newIntent(context!!))
+    }
+
+    fun openCamera() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { photoIntent ->
+            photoIntent.resolveActivity(activity!!.packageManager)?.also {
+                val photoFile: File? = try { createImageFile(context!!) } catch(e: IOException) { null }
+                photoFile?.also {
+                    photoUri = FileProvider.getUriForFile(activity!!, BuildConfig.APPLICATION_ID, it)
+                    photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+                    startActivityForResult(photoIntent, REQUEST_IMAGE_CAPTURE)
+                }
+            }
+        }
     }
 
     fun startEditMode() {
@@ -183,6 +219,14 @@ class NoteFragment: BaseFragment() {
         noteBinding.noteTitleEditText.isEnabled = false
         noteBinding.noteBodyEditText.isEnabled = false
         noteBinding.noteAddImagesButton.visibility = View.GONE
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            notePhotoAdapter.addItem(photoUri)
+            viewModel.notePhotoUris = arrayListOf(photoUri)
+            addPhotoToGallery(context!!, photoUri)
+        }
     }
 
 }

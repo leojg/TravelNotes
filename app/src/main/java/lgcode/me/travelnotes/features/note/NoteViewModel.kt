@@ -1,5 +1,6 @@
 package lgcode.me.travelnotes.features.note
 
+import android.net.Uri
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import lgcode.me.travelnotes.core.domain.Note
@@ -9,6 +10,7 @@ import lgcode.me.travelnotes.core.usecase.DeleteNoteUseCase
 import lgcode.me.travelnotes.core.usecase.UpdateNoteUseCase
 import lgcode.me.travelnotes.core.viewmodel.BaseViewModel
 import java.util.*
+import kotlin.collections.ArrayList
 
 class NoteViewModel(
     val createNoteUseCase: CreateNoteUseCase,
@@ -20,6 +22,8 @@ class NoteViewModel(
     val noteTitle = ObservableField<String>()
     val noteBody = ObservableField<String>()
     val noteCalendar = MutableLiveData<Calendar>()
+
+    var notePhotoUris: MutableList<Uri>? = null
 
     private lateinit var note: Note
 
@@ -69,6 +73,10 @@ class NoteViewModel(
         }
     }
 
+    fun updateNotePhotos(notePhotoUris: List<Uri>) {
+        this.notePhotoUris = notePhotoUris as ArrayList<Uri>
+    }
+
     private fun buildNote(): Note? {
         if (noteBody.get() == null) {
             error.value = "The note is empty."
@@ -81,11 +89,13 @@ class NoteViewModel(
         }
         val noteDate = noteCalendar.value!!.time
 
-        return if (::note.isInitialized) {
-            Note(note.id, noteTitle.get(), noteBody.get()!!, noteDate)
+        val note = if (::note.isInitialized) {
+            Note(note.id, noteTitle.get(), noteBody.get()!!, noteDate, notePhotoUris)
         } else {
-            Note(noteTitle.get(), noteBody.get()!!, noteDate)
+            Note(noteTitle.get(), noteBody.get()!!, noteDate, notePhotoUris)
         }
+
+        return note
     }
 
     fun setNote(note: Note?) {
@@ -94,6 +104,7 @@ class NoteViewModel(
             noteTitle.set(note.title)
             noteBody.set(note.body)
             noteCalendar.value!!.time = note.date
+            notePhotoUris = note.images
         } else {
             error.value = "Error showing note"
         }

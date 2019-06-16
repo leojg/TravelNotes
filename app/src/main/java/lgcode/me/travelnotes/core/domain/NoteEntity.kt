@@ -11,5 +11,5 @@ class NoteEntity (
     val title: String? = null,
     val body: String,
     val date: Date,
-    var image: Uri? = null
+    var images: List<String>? = null
 )

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import lgcode.me.travelnotes.R
 import lgcode.me.travelnotes.databinding.ItemGalleryBinding
 import java.io.File
@@ -22,7 +22,7 @@ class GalleryAdapter(val context: Context): RecyclerView.Adapter<GalleryAdapter.
 
     override fun onBindViewHolder(holder: GalleryViewHolder, position: Int) {
         val uri = imageList[position]
-        Picasso.get().load(File(uri.path)).into(holder.binding.galleryItemImageview)
+        Glide.with(context).load(File(uri.path)).into(holder.binding.galleryItemImageview)
     }
 
     fun addItems(imageList: List<Uri>) {

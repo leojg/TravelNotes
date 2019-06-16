@@ -7,4 +7,8 @@ The app iself has a couple of features, as it's intended to use on the road, wil
 # Notes
 
 The working branch is develop
-The stable branch is master 
+The stable branch is master
+
+# Third party libraries, icons, etc:
+
+Icons made by https://www.flaticon.com/authors/icon-works from <a href="https://www.flaticon.com/

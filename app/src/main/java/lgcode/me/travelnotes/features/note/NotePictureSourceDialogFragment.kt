@@ -20,12 +20,10 @@ class NotePictureSourceDialogFragment: DialogFragment() {
 
             val binding = DialogPictureSourceBinding.inflate(LayoutInflater.from(activity))
             binding.openCameraButton.setOnClickListener {
-                Toast.makeText(activity, "hola", Toast.LENGTH_LONG).show()
                 (targetFragment as NoteFragment).onPictureDialogResponse(1)
                 dismiss()
             }
             binding.openGalleryButton.setOnClickListener {
-                Toast.makeText(activity, "hola hola", Toast.LENGTH_LONG).show()
                 (targetFragment as NoteFragment).onPictureDialogResponse(2)
                 dismiss()
             }

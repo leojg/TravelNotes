@@ -12,5 +12,18 @@ object Converters {
     @JvmStatic @TypeConverter fun toString(value: Uri?): String? = value?.toString()
     @JvmStatic @TypeConverter fun fromUri(value: String?): Uri? = value?.let { Uri.parse(value) }
 
+    @JvmStatic @TypeConverter fun toString(value: List<String>?): String {
+        var result = ""
+        value?.forEach {
+            result += "$it,"
+        }
+        result.removeSuffix(",")
+        return result
+    }
+
+    @JvmStatic @TypeConverter fun toList(value: String?): List<String> {
+        return value!!.split(",")
+    }
+
 
 }

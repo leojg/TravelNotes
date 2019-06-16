@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <external-path name="note_photos" path="Android/data/lgcode.me.travelnotes/files/Pictures" />
+</paths>

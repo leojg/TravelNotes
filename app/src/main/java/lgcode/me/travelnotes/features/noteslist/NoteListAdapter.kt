@@ -21,12 +21,11 @@ class NoteListAdapter(var noteListFragment: NotesListFragment): RecyclerView.Ada
     override fun getItemCount() = notesList.size
 
     override fun onBindViewHolder(holder: NoteListViewHolder, position: Int) {
-        notesList[position].let { note ->
-            holder.binding.noteSummaryTextview.text = if (note.title.isNullOrEmpty()) note.body else note.title
-            holder.binding.noteDateTextview.text = DateFormat.getDateInstance().format(note.date)
-            holder.itemView.setOnClickListener {
-                noteListFragment.goToViewNoteFragment(note)
-            }
+        val note = notesList[position]
+        holder.binding.noteSummaryTextview.text = if (note.title.isNullOrEmpty()) note.body else note.title
+        holder.binding.noteDateTextview.text = DateFormat.getDateInstance().format(note.date)
+        holder.itemView.setOnClickListener {
+            noteListFragment.goToViewNoteFragment(note)
         }
     }
 
